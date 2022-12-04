@@ -13,7 +13,7 @@
                 <div id="divTablaMejoras">
                     <table id="tablaMejoras" class="table table-responsive-sm">
                         <thead>
-                            <tr class="filtros">
+                            <tr class="filtros bg-negro">
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
@@ -23,7 +23,7 @@
                         <tbody>
                         @foreach (var mejoras in (ViewBag.Mejoras as List<IndexProMejoraViewModel>))
                         {
-                            <tr class="table-row ">
+                            <tr class="table-row bg-letras">
                                 <td>
                                     @Html.DisplayFor(m => mejoras.Id)
                                 </td>

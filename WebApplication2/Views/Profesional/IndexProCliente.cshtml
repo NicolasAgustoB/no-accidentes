@@ -13,7 +13,7 @@
             <div id="divTablaClientes">
                 <table id="tablaClientes" class="table table-responsive-sm">
                     <thead>
-                        <tr class="filtros">
+                        <tr class="filtros bg-negro">
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Rubro</th>
@@ -26,7 +26,7 @@
                     <tbody>
                     @foreach (var cliente in (ViewBag.Cliente as List<IndexProCliente>))
                     {
-                        <tr class="table-row ">
+                        <tr class="table-row bg-letras">
                             <td>
                                 @Html.DisplayFor(m => cliente.Id)
                             </td>
@@ -71,7 +71,7 @@
         <div id="divTablaClientes">
             <table id="tablaClientes" class="tableCliente table-sm">
                 <thead>
-                    <tr class="filtros">
+                <tr class="filtros bg-negro">
                         <th>Nombre</th>
                         <th>Rubro</th>
                         <th>Direccion</th>
@@ -83,7 +83,7 @@
                 <tbody>
                 @foreach (var cliente in (ViewBag.Cliente as List<IndexProCliente>))
                 {
-                    <tr class="table-row ">
+                    <tr class="table-row bg-letras">
                         <td>
                             @Html.DisplayFor(m => cliente.Nombre)
                         </td>

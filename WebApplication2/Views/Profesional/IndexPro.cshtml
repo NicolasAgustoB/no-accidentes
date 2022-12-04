@@ -12,7 +12,7 @@
         <div id="divTablaServicios">
             <table id="tablaServicios" class="table table-responsive-sm">
                 <thead>
-                    <tr class="filtros">
+                    <tr class="filtros bg-negro">
                         <th >Id</th>
                         <th>Actividad</th>
                         <th>Cliente</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach (var servicio in (ViewBag.Proximos as List<ServiciosTablasVM>))
                     {
-                        <tr class="table-row ">
+                        <tr class="table-row bg-letras">
                             <td >
                                 @Html.DisplayFor(m => servicio.Id)
                             </td>

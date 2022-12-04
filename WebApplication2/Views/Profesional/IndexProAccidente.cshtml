@@ -13,7 +13,7 @@
             <div id="divTablaAccidentes">
                 <table id="tablaAccidentes" class="table table-responsive-sm">
                     <thead>
-                        <tr class="filtros">
+                        <tr class="filtros bg-negro">
                             <th>Id</th>
                             <th>Tipo</th>
                             <th>Empresa</th>
@@ -29,7 +29,7 @@
                     <tbody>
                     @foreach (var accidente in (ViewBag.Accidentes as List<IndexAccidenteViewModel>))
                     {
-                        <tr class="table-row ">
+                        <tr class="table-row bg-letras">
                             <td>
                                 @Html.DisplayFor(m => accidente.Id)
                             </td>
