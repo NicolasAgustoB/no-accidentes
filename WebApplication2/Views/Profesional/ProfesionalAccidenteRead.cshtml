@@ -1,0 +1,88 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model AccidenteReadViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Detalles del accidente</h1>
+
+<div class="col-sm-12 ">
+        <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Accidente</h6>
+            <div class="row mb-3">
+                <div class=" col-12 col-md-4 ">
+                 <label class="form-label">Cliente</label>
+                <input class="col-12 form-control" value="@ViewBag.Accidente.Cliente" disabled>
+                </div>
+
+                <div class=" col-12 col-md-3 ">
+                    @{
+                    var fecha = ViewBag.Accidente.Fecha;
+                    var formatFecha = fecha.ToString("dd/MM/yyyy HH:mm tt");
+                }
+                <label class="form-label">Fecha</label>
+                <input class="col-sm-12 form-control" value="@formatFecha" disabled>
+            </div>
+            <div class=" col-12 col-md-1 ">
+                <label class="form-label">Accidentados</label>
+                <input class="col-12 form-control" value="@ViewBag.Accidente.Accidentados" disabled>
+            </div>
+            </div>
+        <div class="row mb-3">
+            <div class=" col-12 ">
+            <label class="control-label">Accidente</label>
+                <textarea class="col-12 form-control" value="@ViewBag.Accidente.Comentario" style="height: 150px;" disabled>@ViewBag.Accidente.Comentario</textarea>
+            </div>
+        </div>
+        @{
+            if (ViewBag.Accidente.Estado != 0)
+            {
+                    <div class="row">
+                            <div class="col-12 invisible">
+                            <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                        </div>
+                    </div>
+            }
+            else{
+                    <div class="row ">
+                        <div class="col-12">
+                            <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                        </div>
+                    </div>
+            }
+        }
+    </div>
+    @{
+        if (ViewBag.Accidente.Estado != 0)
+        {
+                <br />
+                <div class="row bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Conclusion</h6>
+                <div class="row mb-3">
+                    <div class=" col-12 col-md-4 ">
+                        <label class="form-label">Profesional</label>
+                        <input class="col-12 form-control" value="@ViewBag.Accidente.Profesional" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class=" col-12 ">
+                        <label class="control-label">Conclusion:</label>
+                        <textarea class="form-control" value="@ViewBag.Accidente.Comentario" style="height: 150px;" disabled>@ViewBag.Accidente.Comentario</textarea>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+            
+
+    @section Scripts{
+    <script src="~/js/Profesional/ProfesionalAccidenteRead.js"></script>
+}

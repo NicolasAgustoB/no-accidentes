@@ -1,0 +1,149 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model ProfesionalViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+
+<div id="createProfesional" class="col-sm-12 invisible">
+        <h1 class="titulo text-center">Crear Profesional</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("CreateProfesional","Administrador")" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="Apellidos" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Apellidos" class="form-control" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="UserName" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+            <div class="row mb-3">
+                    <label asp-for="Rut" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Rut" class="form-control" />
+                        <span asp-validation-for="Rut" class="text-danger"></span>
+                    </div>
+                </div>
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+            <input asp-for="rolId" value="2" class="form-control" hidden />
+            <input asp-for="SucursalId" value="0" class="form-control" hidden />
+            <div class="row ">
+                <div class="col-12">
+                    <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmProfesional","Administrador")' role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="updateProfesional" class="col-sm-12 invisible ">
+        <h1 class="titulo text-center">Modificar Profesional</h1>
+        <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+            <form action="@Url.Action("UpdateProfesional","Administrador")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3">
+                    <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Nombre" value="@ViewBag.Profesional.Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Apellidos" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Apellidos" value="@ViewBag.Profesional.Apellidos" class="form-control" />
+                        <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="UserName" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="UserName" value="@ViewBag.Profesional.UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Rut" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Rut" value="@ViewBag.Profesional.Rut" class="form-control" />
+                        <span asp-validation-for="Rut" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Email" value="@ViewBag.Profesional.Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Telefono" value="@ViewBag.Profesional.Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="Estado" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <select class="form-select" id="comboEstadoProfesional" asp-for="Estado">
+                            <option value="0">Inactivo</option>
+                            <option value="1">Activo</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmProfesional","Administrador")' role="button">Cancelar</a>
+                    </div>
+                </div>
+                <input asp-for="Id" value="@ViewBag.Profesional.Id" class="form-control" hidden />
+                <input asp-for="rolId" value="@ViewBag.Profesional.RolId" class="form-control" hidden />
+                <input asp-for="SucursalId" value="@ViewBag.Profesional.SucursalId" class="form-control" hidden />
+            </form>
+        </div>
+    </div>
+    <input value="@ViewBag.Profesional.Id" id="idProfesional" class="form-control invisible" />
+    <input value="@ViewBag.Profesional.Estado" id="estadoProfesional" class="form-control invisible" />
+@section Scripts{
+    <script src="~/js/Administrador/AdministradorProfesional.js"></script>
+}
+

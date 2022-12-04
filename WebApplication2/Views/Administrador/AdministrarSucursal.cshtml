@@ -1,0 +1,139 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model SucursalViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+<div id="createSucursal" class="col-sm-12 invisible">
+    <h1 class="titulo text-center">Crear Sucursal</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+            <form action="@Url.Action("CreateSucursal","Administrador")" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="Trabajadores" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Trabajadores" class="form-control" />
+                        <span asp-validation-for="Trabajadores" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Direccion" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                    <label asp-for="EmpresaId" class="col-sm-2 col-form-label">Empresa</label>
+                <div class="col-sm-10 col-xl-12">
+                        <select asp-for="EmpresaId" value="Seleccione una empresa" class="form-select mb-3"  id="comboEmpresa">
+                            @foreach (var empresa in (ViewBag.Empresas as List<Empresa>))
+                            {
+                                <option value=@empresa.Id>@empresa.Nombre</option>
+                            }
+                         </select>
+                    <span asp-validation-for="EmpresaId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="updateSucursal" class="col-sm-12 invisible ">
+    <h1 class="titulo text-center">Modificar Sucursal</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("UpdateSucursal","Administrador")" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-3 invisible">
+                <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12 ">
+                    <input asp-for="Id" value="@ViewBag.Sucursal.Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+                <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Nombre" value="@ViewBag.Sucursal.Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+                <label asp-for="Trabajadores" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Trabajadores" value="@ViewBag.Sucursal.Trabajadores" class="form-control" />
+                    <span asp-validation-for="Trabajadores" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+                <label asp-for="Direccion" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Direccion" value="@ViewBag.Sucursal.Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+                <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Telefono" value="@ViewBag.Sucursal.Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="EmpresaId" class="col-sm-2 col-form-label">Empresa</label>
+            <div class="col-sm-10 col-xl-12">
+                <select asp-for="EmpresaId" class="form-select mb-3" id="comboEmpresaUpdate">
+                @foreach (var empresa in (ViewBag.Empresas as List<Empresa>))
+                {
+                    <option value=@empresa.Id>@empresa.Nombre</option>
+                }
+                </select>
+                <span asp-validation-for="EmpresaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Estado" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10 col-xl-12">
+                <select class="form-select" id="comboEstadoSucursal" asp-for="Estado">
+                    <option value="1">Activa</option>
+                    <option value="0">Inactiva</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-12">
+                <button id="btnUpdate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<input value="@ViewBag.Sucursal.Id" id="idSucursal" class="form-control invisible" />
+<input value="@ViewBag.Sucursal.Estado" id="estadoSucursal" class="form-control invisible" />
+<input value="@ViewBag.Sucursal.EmpresaId" id="empresaId" class="form-control invisible" />
+@section Scripts{
+    <script src="~/js/Administrador/AdministradorSucursal.js"></script>
+}

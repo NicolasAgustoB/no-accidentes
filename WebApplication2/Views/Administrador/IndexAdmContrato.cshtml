@@ -1,0 +1,70 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model ContratoViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Contratos</h1>
+    <div class="bg-secondary rounded h-100 p-4">
+        <div id="divTablaContratos">
+            <table id="tablaContratos" class="table table-responsive-sm table-responsive-mb">
+                <thead>
+                    <tr class="filtros bg-negro">
+                        <th>Id </th>
+                        <th>Estado</th>
+                        <th>Sucursal</th>
+                        <th>Empresa</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Termino</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var contrato in (ViewBag.Contrato as List<IndexAdmContratoViewModel>))
+                {
+                    <tr class="table-row bg-letras">
+                        <td>
+                            @Html.DisplayFor(m => contrato.IdContrato)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => contrato.EstadoContrato)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => contrato.NombreSucursal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => contrato.NombreEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => contrato.FechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => contrato.FechaTermino)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row ">
+            <div class="col-12">
+                <form action="@Url.Action("FinalizarContrato","Administrador")" method="post">
+                    <button type="submit" id="btnFinalizeContrato" class="btn btn-primary btnRead float-left invisible">Finalizar</button>
+                    <input asp-for="Id" id="inputContratoFinalize" class="form-control" hidden />
+                </form>
+                <form action="@Url.Action("AdministradorContrato","Administrador")">
+                    <button type="submit" id="btnCreateContrato" class="btn btn-primary btnCreate float-right">Crear</button>
+                    <input name="Id" id="inputCreateServicio" class="form-control" hidden />
+                </form>
+                <form action="@Url.Action("AdministradorContrato","Administrador")">
+                    <button type="submit" id="btnUpdateContrato" class="btn btn-primary btnUpdate float-right invisible">Modificar</button>
+                    <input name="Id" id="inputUpdateServicio" class="form-control" hidden />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdmContrato.js"></script>
+}

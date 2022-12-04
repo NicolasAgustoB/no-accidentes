@@ -1,0 +1,177 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model IndexAdmClienteViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+<h1 class="titulo text-center">Empresas</h1>
+<div class="col-sm-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <div id="divTablaEmpresas">
+                <table id="tablaEmpresas" class="table table-responsive-sm">
+                <thead>
+                        <tr class="filtros bg-negro">
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Rubro</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var empresa in (ViewBag.Empresa as List<IndexAdmClienteViewModel>))
+                {
+                        <tr class="table-row bg-letras">
+                         <td>
+                            @Html.DisplayFor(m => empresa.IdEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => empresa.NombreEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => empresa.RubroEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => empresa.DireccionEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => empresa.TelefonoEmpresa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => empresa.NameEstadoEmpresa)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+
+            <div class="col-12">
+                <form action="@Url.Action("AdministrarEmpresa","Administrador")">
+                        <button type="submit" id="btnCreateEmpresa" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="Id" id="inputCreateEmpresa" class="form-control " hidden />
+                </form>
+                <form action="@Url.Action("AdministrarEmpresa","Administrador")">
+                        <button type="submit" id="btnUpdateEmpresa" class="btn btn-primary btnUpdate float-xl-right float-sm-left invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateEmpresa" class="form-control " hidden />
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<h1 class="titulo text-center">Sucursales</h1>
+<div class="col-sm-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <div id="divTablaSucursales">
+            <table id="tablaSucursales" class="table table-responsive-sm">
+                <thead>
+                    <tr class="filtros bg-negro">
+                        <th>Id </th>
+                        <th>Nombre</th>
+                        <th>Trabajadores</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sucursal in (ViewBag.Sucursal as List<IndexAdmClienteViewModel>))
+                    {
+                        <tr class="table-row bg-letras">
+                            <td>
+                                @Html.DisplayFor(m => sucursal.IdSucursal)
+                            </td>
+                            <td>
+                                 @Html.DisplayFor(m => sucursal.NombreSucursal)
+                            </td>
+                            <td>
+                                 @Html.DisplayFor(m => sucursal.TrabajadoresSucursal)
+                            </td>
+                            <td>
+                                 @Html.DisplayFor(m => sucursal.DireccionSucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => sucursal.TelefonoSucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => sucursal.NameEstadoSucursal)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row ">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarSucursal","Administrador")">
+                        <button type="submit" id="btnCreateSucursal" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="EmpresaId" id="inputCreateSucursal" class="form-control " hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarSucursal","Administrador")">
+                        <button type="submit" id="btnUpdateSucursal" class="btn btn-primary btnUpdate float-xl-right float-sm-left invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateSucursal" class="form-control " hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="titulo text-center">Cliente</h1>
+<div class="col-sm-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <div id="divTablaClientes">
+            <table id="tablaClientes" class="table table-responsive-sm">
+                <thead>
+                    <tr class="filtros bg-negro">
+                        <th>Id </th>
+                        <th>Nombre</th>
+                        <th>Rut</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cliente in (ViewBag.Cliente as List<IndexAdmClienteViewModel>))
+                    {
+                        <tr class="table-row bg-letras">
+                            <td >
+                                @Html.DisplayFor(m => cliente.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Telefono)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row ">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarCliente","Administrador")">
+                        <button type="submit" id="btnCreateCliente" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="SucursalId" id="inputCreateCliente" class="form-control " hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarCliente","Administrador")">
+                        <button type="submit" id="btnUpdateCliente" class="btn btn-primary btnUpdate float-xl-right float-sm-left invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateCliente" class="form-control " hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdmCliente.js"></script>
+}

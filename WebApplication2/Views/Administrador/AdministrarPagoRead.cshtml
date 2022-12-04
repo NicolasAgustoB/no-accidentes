@@ -1,0 +1,128 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Detalles del Pago</h1>
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="row mb-3">
+                <div class="col-12 col-md-6 mb-2">
+                    <label class="form-label">Empresa</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.NombreEmpresa" disabled>
+                </div>
+                <div class=" col-12 col-md-6 ">
+                    <label class="form-label">Sucursal</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.NombreSucursal" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-4 mb-2">
+                    <label class="form-label">Fecha Creación</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.Fecha" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    <label class="form-label">Fecha Limite</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.FechaLimite" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    <label class="form-label">Fecha Pago</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.FechaPago" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-4 mb-2">
+                    <label class="form-label">Estado Pago</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.EstadoPago" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    <label class="form-label">Metodo de Pago</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.MetodoPago" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    <label class="form-label">Monto Total</label>
+                    <input class="col-12 form-control" value="@ViewBag.Pago.MontoTotal" disabled>
+                </div>
+            </div>
+        </div>
+     </div>
+     <br />
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div id="divTablaPagos">
+                <table id="tablaServicios" class="table table-responsive-sm">
+                    <thead>
+                        <tr class="filtros">
+                            <th>Id </th>
+                            <th>Actividad</th>
+                            <th>Profesional</th>
+                            <th>Empresa</th>
+                            <th>Sucursal</th>
+                            <th>Fecha</th>
+                            <th>Hora Inicio</th>
+                            <th>Hora Termino</th>
+                            <th>Estado</th>
+                            <th>Adicional</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var servicio in (ViewBag.Servicio as List<PagoReadTablaViewModel>))
+                    {
+                        <tr class="table-row ">
+                            <td>
+                                @Html.DisplayFor(m => servicio.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.TipoServicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Profesional)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Empresa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Sucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.HoraInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.HoraTermino)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Estado)
+                            </td>
+                            <td>
+                                @Html.CheckBox("Adicional",servicio.Adicional)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Valor)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row ">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarServicioRead","Administrador")">
+                        <button type="submit" id="btnReadServicio" class="btn btn-primary btnRead float-left invisible">Detalles</button>
+                        <input name="Id" id="inputSelectedServicioRead" class="form-control" hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Administrador/AdmPagoRead.js"></script>
+}
+

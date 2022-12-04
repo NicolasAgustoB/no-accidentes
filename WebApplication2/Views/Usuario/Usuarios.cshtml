@@ -1,0 +1,50 @@
+﻿@model List<Usuario> 
+<h1>Usuarios</h1>
+<table>
+<thead>
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            RolId
+        </th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var usuario in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => usuario.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(m => usuario.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(m => usuario.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(m => usuario.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(m => usuario.RolId)
+            </td>
+        </tr>   
+    }
+</tbody>
+</table>
+
+<input type="submit" href="@Url.Action("Login","UsuarioController1")"/>
+<div class="d-flex justify-content-center links">
+    Don't have an account?<a href="@Url.Action("Login","Usuario")">Sign Up</a>
+</div>

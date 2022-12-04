@@ -1,0 +1,163 @@
+﻿@using AppWeb.Models.ViewModels.Reporte
+@model ReporteActividadesVM; 
+@{
+    Layout = "~/Views/Reportes/_LayoutReportes.cshtml";
+    var countEmpresas = 0;    
+}
+
+   @foreach (var empresa in Model.Empresas)
+   {   
+       countEmpresas = countEmpresas + 1;
+       <h1 class="titulo text-center">@empresa.NombreEmpresa</h1>
+       <br />
+       var countSucursales = 0;
+       @foreach (var sucursal in empresa.Sucursales)
+       {
+           countSucursales = countSucursales + 1;
+           <div class="border border-dark">
+                <div class="col-sm-12">
+                    <div>
+                        <div class="row flexrow mb-3">
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Nombre Sucursal</label>
+                                    <input class="col-12" value="@sucursal.NombreSucursal" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Dirección</label>
+                                    <input class="col-12" value="@sucursal.DireccionSucursal" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-2">
+                                <label class="form-label">Email</label>
+                                    <input class="col-12" value="@empresa.EmailEmpresa" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Telefono</label>
+                                    <input class="col-12" value="@sucursal.TelefonoSucursal" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @if (sucursal.Servicios.Count == 0)
+                {
+                    <div class="border border-dark">
+                        <h1 class="titulo text-center">Resumen de las Actividades</h1>          
+                        <br />
+                        <p class="titulo text-center">No se realizaron Actividades</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="border border-dark">
+                        <h1 class="titulo text-center">Resumen de las Actividades</h1>    
+                        <div class="col-sm-12">
+                
+                            @{
+                                var tiposervicios = sucursal.Servicios.ToList().GroupBy(d => d.TipoServicio);
+                                foreach (var tipo in tiposervicios)
+                                {
+                                            <br />
+                                            <h3>@tipo.Key.ToString()</h3>
+                                            <br />
+                                            <div class="row flexrow mb-3">
+                                                <div class=" col-12 col-md-6 ">
+                                                    <label class="form-label">Totales</label>
+                                                        <input class="col-12" value="@sucursal.Servicios.ToList().Count(d => d.TipoServicio == tipo.Key.ToString())" disabled>
+                                                </div>
+                                                <div class=" col-12 col-md-6 ">
+                                                    <label class="form-label">Pendientes</label>
+                                                        <input class="col-12" value="@sucursal.Servicios.ToList().Count(d => d.TipoServicio == tipo.Key && d.Estado == "Pendiente")" disabled>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-2">
+                                                    <label class="form-label">Realizadas</label>
+                                                        <input class="col-12" value="@sucursal.Servicios.ToList().Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Realizada")" disabled>
+                                                </div>
+                                                <div class=" col-12 col-md-6 ">
+                                                    <label class="form-label">Canceladas</label>
+                                                        <input class="col-12" value="@sucursal.Servicios.ToList().Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Cancelada")" disabled>
+                                                </div>
+                                                <div class="col-12 col-md-6 mb-2">
+                                                    <label class="form-label">Atrasadas</label>
+                                                        <input class="col-12" value="@sucursal.Servicios.ToList().Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Atrasada")" disabled>
+                                                </div>
+                                            </div>
+                                }
+                            }
+                   
+                        </div>            
+                        <h1 class="titulo text-center">Actividades</h1>
+                        <br />
+                        <div class="col-sm-12">
+                            <table id="tablaServicios" class="table">
+                                <thead>
+                                    <tr class="filtros">
+                                        <th>Id </th>
+                                        <th>Actividad</th>
+                                        <th>Profesional</th>
+                                        <th>Cliente</th>
+                                        <th>Telefono Cliente</th>
+                                        <th>Fecha</th>
+                                        <th>Hora Inicio</th>
+                                        <th>Hora Termino</th>
+                                        <th>Estado</th>
+                                        <th>Adicional</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var servicio in sucursal.Servicios)
+                                    {
+                                        <tr class="table-row ">
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.Id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.TipoServicio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.Profesional)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.Cliente)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.TelefonoCliente)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.Fecha)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.HoraInicio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.HoraTermino)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => servicio.Estado)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.CheckBox("Adicional",servicio.Adicional)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+        
+           </div>
+           var sucursales = empresa.Sucursales.Count();
+           @if (countSucursales < sucursales)
+           {
+              <p style="page-break-after: always;"></p>
+           }
+           
+       }
+       var empresas = Model.Empresas.Count();
+       @if (countEmpresas < empresas)
+       {
+           <p style="page-break-after: always;"></p>
+       }
+   
+   }
+

@@ -1,0 +1,126 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model IndexProMejoraViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+<h1 class="titulo text-center">Actividades de Mejora</h1>
+<div class="row ">
+    <div class="col-sm-12 col-md-8">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div id="divTablaMejoras">
+                    <table id="tablaMejoras" class="table table-responsive-sm">
+                        <thead>
+                            <tr class="filtros">
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var mejoras in (ViewBag.Mejoras as List<IndexProMejoraViewModel>))
+                        {
+                            <tr class="table-row ">
+                                <td>
+                                    @Html.DisplayFor(m => mejoras.Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => mejoras.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => mejoras.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => mejoras.Situacion)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="@Url.Action("ProfesionalMejoraRead","Profesional")">
+                            <button type="submit" id="btnReadServicio" class="btn btn-primary btnCreate float-right">Detalles</button>
+                            <input name="Id" id="inputReadServicio" class="form-control" hidden />
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divCreate"class="col-sm-12 col-md-4">
+            <form action="@Url.Action("CreateMejora","Profesional")" method="post" class="borders">
+        <div class="bg-secondary rounded h-100 p-4">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+                    <div class="row mb-3 ">
+                        <div class=" col-12 ">
+                            <label asp-for="Descripcion" class="control-label"></label>
+                            <input asp-for="Descripcion" class="form-control" />
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+                    </div>
+                <input asp-for="ServicioId" id="servicioId" value="@ViewBag.Servicio.Id" class="form-control" hidden />
+                <div class="row mb-3 ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Crear</button>
+                    </div>
+                </div>
+            
+            </div>
+
+        </form>
+     </div>
+    <div id="divFinish"class="col-sm-12 col-md-4 invisible">
+        <form action="@Url.Action("FinishMejora","Profesional")" method="post" class="borders">
+            <div class="bg-secondary rounded h-100 p-4">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Comentario" class="control-label"></label>
+                        <input asp-for="Comentario" class="form-control" />
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Situacion" class="control-label"></label>
+                        <select id="comboEstadoContrato" class="form-select" asp-for="Situacion">
+                            <option value="">Seleccione...</option>
+                            <option value="1">Realizada</option>
+                            <option value="2">Fallida</option>
+                        </select>
+                        <span asp-validation-for="Situacion" class="text-danger"></span>
+                    </div>
+                </div>
+                <input asp-for="Id" id="mejoraId" class="form-control" hidden />
+                <input asp-for="ServicioId" value="@ViewBag.Servicio.Id" class="form-control" hidden />
+                <div class="row mb-3 ">
+                    <div class="col-12">
+                        <button id="btnFinish" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Terminar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+@section Scripts{
+    <script src="~/js/Profesional/IndexProMejora.js"></script>
+}

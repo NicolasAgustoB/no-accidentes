@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@model Test
+
+
+<form action="@Url.Action("CreateTest","Reportes")" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row mb-3">
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10 col-xl-12 ">
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10 col-xl-12">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    @for (int i = 0; i < 3; i++)
+    {
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Comentario</label>
+            <div class="col-sm-10 col-xl-12">
+                <input name="ResultadoTareas[@i].Estado" value="1" class="form-check-input checkInput" style="margin-left:0" type="checkbox">
+                <input asp-for="Name" name="ResultadoTareas[@i].Comentario" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+        </div>
+    }   
+    <div class="row ">
+        <div class="col-12">
+            <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+            <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+
+
+<form action="@Url.Action("CreateTest","Reportes")" method="post">
+    <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10 col-xl-12 ">
+        <input Name="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    @for (int i = 0; i < 3; i++)
+    {
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Comentario</label>
+            <div class="col-sm-10 col-xl-12">               
+                <input  name="ResultadoTareas[@i].Comentario" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+        </div>
+    }
+    <div class="row ">
+        <div class="col-12">
+            <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+            <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script src="~/js/test.js"></script>
+}
+

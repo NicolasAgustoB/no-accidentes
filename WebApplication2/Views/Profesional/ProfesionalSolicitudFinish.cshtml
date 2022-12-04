@@ -1,0 +1,51 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@model SolicitudFinishViewModel
+
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+
+    <div id="finishSolicitud" class="col-sm-12">
+        <h1 class="titulo text-center">Responder Solicitud</h1>
+        <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+            <form action="@Url.Action("FinishSolicitud","Profesional")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3">
+                    <label asp-for="Respuesta" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12 ">
+                        <textarea asp-for="Respuesta" class="form-control" id="inputInformeFinish" style="height: 70px;"></textarea>
+                        <span asp-validation-for="Respuesta" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Situacion" class="control-label"></label>
+                        <select id="comboEstadoSolicitud" class="form-select" asp-for="Situacion" >
+                            <option value="">Seleccione...</option>
+                            <option value="1">Aceptada</option>
+                            <option value="2">Rechazada</option>
+                        </select>
+                        <span asp-validation-for="Situacion" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <input asp-for="Id" value="@ViewBag.Solicitud.Id" class="form-control" hidden />
+                <input asp-for="EmpleadoId" value="@Accessor.HttpContext.Session.GetString("Id")" class="form-control" hidden />
+            <div class="row ">
+                <div class="col-12">
+                    <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Profesional/ProfesionalServicioFinish.js"></script>
+    }

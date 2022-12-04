@@ -1,0 +1,183 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model ClienteViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+<div id="createCliente" class="col-sm-12 invisible">
+    <h1 class="titulo text-center">Crear Cliente</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("CreateCliente","Administrador")" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Apellidos" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="UserName" class="col-sm-2 col-form-label">Usuario</label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Password" class="col-sm-2 col-form-label">Contraseña</label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Rut" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Rut" class="form-control" />
+                    <span asp-validation-for="Rut" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 col-xl-6">
+                        <select asp-for="EmpresaId" class="form-select mb-3 " id="comboEmpresaCreate">
+                        @foreach (var empresa in (ViewBag.Empresas as List<Empresa>))
+                        {
+                            <option value=@empresa.Id>@empresa.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Empresa" class="text-danger"></span>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <select asp-for="SucursalId" class="form-select mb-3" id="comboSucursalCreate" hidden>
+                    </select>
+                    <span asp-validation-for="SucursalId" class="text-danger"></span>
+                </div>
+            </div>
+            <input asp-for="rolId" value="3" hidden class="form-control" />
+            <div class="row ">
+                <div class="col-12">
+                    <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="updateCliente" class="col-sm-12 invisible ">
+    <h1 class="titulo text-center">Modificar Cliente</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("UpdateCliente","Administrador")" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3 invisible">
+                <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                    <input asp-for="Id" value="@ViewBag.Cliente.Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Nombre" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Nombre" value="@ViewBag.Cliente.Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Apellidos" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Apellidos" value="@ViewBag.Cliente.Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="UserName" class="col-sm-2 col-form-label">Usuario</label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="UserName" value="@ViewBag.Cliente.UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Password" class="col-sm-2 col-form-label">Contraseña</label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Password" value="@ViewBag.Cliente.Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Email" value="@ViewBag.Cliente.Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Rut" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Rut" value="@ViewBag.Cliente.Rut" class="form-control" />
+                    <span asp-validation-for="Rut" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Telefono" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12">
+                    <input asp-for="Telefono" value="@ViewBag.Cliente.Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12 col-xl-6">
+                    <select asp-for="EmpresaId"  class="form-select mb-3" id="comboEmpresaUpdate">
+                        @foreach (var empresa in (ViewBag.Empresas as List<Empresa>))
+                        {
+                            <option value=@empresa.Id>@empresa.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Empresa" class="text-danger"></span>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <select asp-for="SucursalId" class="form-select mb-3" id="comboSucursalUpdate" hidden>
+                    </select>
+                    <span asp-validation-for="SucursalId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    <button id="btnUpdate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmCliente","Administrador")' role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<input value="@ViewBag.Cliente.Id" id="idCliente" class="form-control invisible" />
+<input value="@ViewBag.Cliente.Estado" id="estadoCliente" class="form-control invisible" />
+<input value="@ViewBag.Sucursal.Id" id="sucursalIdCliente" class="form-control invisible" />
+<input value="@ViewBag.Empresa.Id" id="empresaIdCliente" class="form-control invisible" />
+
+@section Scripts{
+    <script src="~/js/Administrador/AdministradorCliente.js"></script>
+}
+

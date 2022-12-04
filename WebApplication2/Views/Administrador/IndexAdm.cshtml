@@ -1,0 +1,79 @@
+﻿@using AppWeb.Models.ViewModel.Profesional
+@model ServiciosTablasVM
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Proximos Servicios</h1>
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+        <div id="divTablaServicios">
+                <table id="tablaServicios" class="table table-responsive-sm" >
+                <thead>
+                        <tr class="filtros bg-negro">
+                        <th>Id</th>
+                        <th>Actividad</th>
+                        <th>Profesional</th>
+                        <th>Cliente</th>
+                        <th>Empresa</th>
+                        <th>Sucursal</th>
+                        <th>Fecha</th>
+                        <th>Inicio</th>
+                        <th>Termino</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var servicio in (ViewBag.Proximos as List<ServiciosTablasVM>))
+                {
+                        <tr class="table-row bg-letras">
+                        <td>
+                            @Html.DisplayFor(m => servicio.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.TipoServicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.EmpleadoNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.ClienteNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.EmpresaNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.SucursalNombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.HoraInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.HoraTermino)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => servicio.EstadoServicioStr)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+        <div class="row">
+            <div class="col-12">
+                <form action="@Url.Action("AdministrarServicioRead","Administrador")">
+                    <button type="submit" id="btnReadServicio" class="btn btn-primary btnRead float-right invisible">Detalles</button>
+                    <input name="Id" id="inputSelectedServicioRead" class="form-control" hidden />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdm.js"></script>
+}

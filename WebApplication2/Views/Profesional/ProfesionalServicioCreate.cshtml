@@ -1,0 +1,141 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model ServicioViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+
+
+    <form action="@Url.Action("CreateServicio","Profesional")" method="post" class="borders">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id="createServicio" class="row g-4 invisible">
+                <h1 class="titulo text-center">Crear Servicio</h1>
+                <div class="col-sm-12 col-md-6">
+                    <div class="bg-secondary rounded h-100 p-4">
+                     <h6 class="mb-4">Datos Actividad</h6>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6 mb-2">
+                            <label asp-for="TipoServicioId" class="control-label">Actividad</label>
+                                <select asp-for="TipoServicioId" required="required" class="form-select mb-3 ">
+                                    <option hidden value="">Seleccione...</option>
+                            @foreach (var tiposervicio in (ViewBag.TipoServicio as List<TipoServicio>))
+                            {
+                                <option value=@tiposervicio.Id>@tiposervicio.Nombre</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TipoServicioId" class="text-danger"></span>
+
+                    </div>
+                    <div class=" col-12 col-md-6 mb-2">
+
+                        <label  class="control-label">Trabajador</label>
+                        <select  required="required"  id="comboEmpleadoIdCreate" class="form-select mb-3 " disabled>
+                            <option value=@ViewBag.Empleado.Id>@ViewBag.Empleado.Nombre</option>
+                        </select>
+                        <span asp-validation-for="EmpleadoId" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class=" col-12 col-md-4 ">
+                        <label asp-for="Fecha" class="control-label"></label>
+                        <input asp-for="Fecha" required="required" class="form-control" id="inputFechaCreate" type="date" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+                    <div class=" col-12 col-md-4 ">
+                        <label asp-for="HoraInicio" class="control-label"></label>
+                        <input asp-for="HoraInicio" required="required" class="form-control" id="inputHoraInicioCreate" type="time" />
+                        <span asp-validation-for="HoraInicio" id="spanHoraInicio" class="text-danger"></span>
+                    </div>
+                    <div class=" col-12 col-md-4 ">
+                        <label asp-for="HoraTermino" class="control-label"></label>
+                        <input asp-for="HoraTermino" required="required" class="form-control" id="inputHoraTerminoCreate" type="time" />
+                        <span asp-validation-for="HoraTermino" class="text-danger"></span>
+                    </div>
+
+            </div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Asistentes" class="control-label"></label>
+                        <input id="asistentesCheck" class="form-check-input checkInput" type="checkbox">
+                        <input asp-for="Asistentes" id="inputAsistentesCreate" class="form-control" disabled />
+                        <span asp-validation-for="Asistentes" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class=" col-12 ">
+                        <label asp-for="Material" class="control-label"></label>
+                        <input id="materialCheck" class="form-check-input checkInput" type="checkbox">
+                        <input asp-for="Material" id="inputMaterialCreate" class="form-control" disabled />
+                        <span asp-validation-for="Material" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Datos Cliente</h6>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6 mb-2">
+                            <label asp-for="EmpresaId" class="control-label">Empresa</label>
+                            <select id="comboEmpresaCreate" asp-for="EmpresaId" class="form-select mb-3 ">
+                            <option hidden value=''>Seleccione...</option>
+                            @foreach (var empresa in (ViewBag.Empresas as List<Empresa>))
+                            {
+                                    <option value=@empresa.Id>@empresa.Nombre</option>
+                            }
+                            </select>
+                        <span asp-validation-for="EmpresaId" class="text-danger"></span>
+                        </div>
+                        <div class=" col-12 col-md-6 mb-2">
+                            <label asp-for="SucursalId" class="control-label">Sucursal</label>
+                            <select id="comboSucursalCreate" asp-for="SucursalId" class="form-select mb-3 " disabled>
+                            </select>
+                        <span asp-validation-for="SucursalId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div id="divTablaClientes" class="row mb-3 invisible">
+                        <table id="tablaClientes" class="table table-responsive-sm ">
+                            <thead>
+                                <tr class="filtros">
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Rut</th>
+                                    <th>Telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                <input  id="inputClienteId" asp-for="ClienteId" class="form-control" hidden/>
+                </div>
+            </div>
+            
+
+
+
+
+
+        </div>
+</form>
+@section Scripts{
+        <script src="~/js/Profesional/ProfesionalServicioCreate.js"></script>
+}

@@ -1,0 +1,90 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model SolicitudReadViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Detalles de la Solicitud</h1>
+
+<div class="col-sm-12 ">
+        <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Solicitud</h6>
+            <div class="row mb-3">
+                <div class=" col-12 col-md-4 ">
+                 <label class="form-label">Cliente</label>
+                <input class="col-12 form-control" value="@ViewBag.Solicitud.Cliente" disabled>
+                </div>
+                <div class=" col-12 col-md-8 ">
+                    @{
+                    var fecha = ViewBag.Solicitud.FechaInicio;
+                    var formatFecha = fecha.ToString("yyyy/MM/dd");
+                }
+                <label class="col-md-12 control-label text-sm-left text-md-right pr-md-4 ">Fecha de creacion</label>
+                <input class="col-sm-12 col-md-3 col-xl-3 float-md-right form-control" value="@formatFecha" disabled>
+            </div>
+            </div>
+        <div class="row mb-3">
+            <div class=" col-12 ">
+            <label class="control-label">Solicitud</label>
+            <textarea class="col-12 form-control" value="@ViewBag.Solicitud.Descripcion" style="height: 150px;" disabled>@ViewBag.Solicitud.Descripcion</textarea>
+            </div>
+        </div>
+        @{
+            if(ViewBag.Solicitud.Situacion != 0){
+                    <div class="row">
+                            <div class="col-12 invisible">
+                            <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                        </div>
+                    </div>
+            }
+            else{
+                    <div class="row ">
+                        <div class="col-12">
+                            <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                        </div>
+                    </div>
+            }
+        }
+    </div>
+    @{
+        if(ViewBag.Solicitud.Situacion != 0){
+                <br />
+                <div class="row bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Respuesta</h6>
+                <div class="row mb-3">
+                    <div class=" col-12 col-md-4 ">
+                        <label class="form-label">Profesional</label>
+                        <input class="col-12 form-control" value="@ViewBag.Solicitud.Empleado" disabled>
+                    </div>
+
+                    <div class=" col-12 col-md-8 ">
+                            @{
+                            var fechatermino = ViewBag.Solicitud.FechaTermino;
+                            var formatFechaTermino = fecha.ToString("yyyy/MM/dd");
+                            }
+                        <label class="col-md-12 control-label text-sm-left text-md-right pr-md-4 ">Fecha de finalizacion</label>
+                        <input class="col-sm-12 col-md-3 col-xl-3 float-md-right form-control" value="@formatFecha" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class=" col-12 ">
+                        <label class="control-label">Respuesta</label>
+                        <textarea class="form-control" value="@ViewBag.Solicitud.Respuesta" style="height: 150px;" disabled>@ViewBag.Solicitud.Respuesta</textarea>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+            
+
+    @section Scripts{
+    <script src="~/js/Profesional/ProfesionalMejoraRead.js"></script>
+}

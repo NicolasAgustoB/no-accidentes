@@ -1,0 +1,69 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model IndexAdmProfesionalViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Profesionales</h1>
+    <div  class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div id="divTablaProfesionales">
+                <table id="tablaProfesionales" class="table table-responsive-sm">
+                    <thead>
+                        <tr class="filtros bg-negro">
+                            <th>Id</th>
+                            <th>Nombre </th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var profesional in (ViewBag.Profesional as List<IndexAdmProfesionalViewModel>))
+                    {
+                        <tr class="table-row bg-letras">
+                            <td>
+                                @Html.DisplayFor(m => profesional.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => profesional.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => profesional.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => profesional.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => profesional.Telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => profesional.Estado)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarProfesional","Administrador")">
+                        <button type="submit" id="btnCreateProfesional" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="Id" id="inputCreateProfesional" class="form-control " hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarProfesional","Administrador")">
+                        <button type="submit" id="btnUpdateProfesional" class="btn btn-primary btnUpdate float-xl-right float-sm-left invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateProfesional" class="form-control " hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdmProfesional.js"></script>
+}

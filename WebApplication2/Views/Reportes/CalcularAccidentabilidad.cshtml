@@ -1,0 +1,96 @@
+﻿@using AppWeb.Models.ViewModels.Reporte
+@model ReporteActividadesVM;
+@{
+    Layout = "~/Views/Reportes/_LayoutReportes.cshtml";
+    var countEmpresas = 0;
+    var countSucursales = 0;
+}
+
+@foreach (var empresa in Model.Empresas)
+{
+    countEmpresas = countEmpresas + 1;
+    <h1 class="titulo text-center">@empresa.NombreEmpresa</h1>
+    <br />
+    @foreach (var sucursal in empresa.Sucursales)
+    {
+        countSucursales = countSucursales + 1;
+        <div class="border border-dark">
+            <div class="col-sm-12">
+                <div>
+                    <div class="row flexrow mb-3">
+                        <div class=" col-12 col-md-6 ">
+                            <label class="form-label">Nombre Sucursal</label>
+                            <input class="col-12" value="@sucursal.NombreSucursal" disabled>
+                        </div>
+                        <div class=" col-12 col-md-6 ">
+                            <label class="form-label">Dirección</label>
+                            <input class="col-12" value="@sucursal.DireccionSucursal" disabled>
+                        </div>
+                        <div class="col-12 col-md-6 mb-2">
+                            <label class="form-label">Email</label>
+                            <input class="col-12" value="@empresa.EmailEmpresa" disabled>
+                        </div>
+                        <div class=" col-12 col-md-6 ">
+                            <label class="form-label">Telefono</label>
+                            <input class="col-12" value="@sucursal.TelefonoSucursal" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            @if (sucursal.Servicios.Count == 0)
+            {
+                <div class="border border-dark">
+                    <h1 class="titulo text-center">Resumen de los Accidentes</h1>
+                    <br />
+                    <p class="titulo text-center">No se registran accidentes</p>
+                </div>
+            }
+            else
+            {
+                <div class="border border-dark">
+                    <h1 class="titulo text-center">Resumen de los Accidentes</h1>
+                    <div class="col-sm-12">
+                        <div class="row flexrow mb-3">
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Desde</label>
+                                <input class="col-12" value="" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Hasta</label>
+                                <input class="col-12" value="" disabled>
+                            </div>
+                        </div>
+                        <div class="row flexrow mb-3">
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Total Accidentes</label>
+                                <input class="col-12" value="" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Total Accidentados</label>
+                                <input class="col-12" value="" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-2">
+                                <label class="form-label">Total Trabajadores</label>
+                                <input class="col-12" value="" disabled>
+                            </div>
+                        </div>                           
+                    </div>
+                </div>
+            }
+
+        </div>
+        var sucursales = empresa.Sucursales.Count();
+        @if (countSucursales <= sucursales)
+        {
+            <p style="page-break-after: always;"></p>
+        }
+
+    }
+    var empresas = Model.Empresas.Count();
+    @if (countEmpresas < empresas)
+    {
+        <p style="page-break-after: always;"></p>
+    }
+
+}

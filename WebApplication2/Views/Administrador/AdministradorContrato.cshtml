@@ -1,0 +1,139 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model ContratoViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+
+    <div id="createContrato" class="col-sm-12 invisible">
+        <h1 class="titulo text-center">Crear Contrato</h1>
+        <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+            <form action="@Url.Action("CreateContrato","Administrador")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3">
+                    <label asp-for="SucursalId" class="col-sm-2 col-form-label">Sucursal</label>
+                    <div class="col-sm-10 col-xl-12">
+                        <select asp-for="SucursalId" required="required"  class="form-select mb-3" id="comboSucursalCreate">
+                            <option hidden value="">Seleccione una sucursal</option>
+                        @foreach (var sucursal in (ViewBag.Sucursal as List<Sucursal>))
+                                {
+                            <option value=@sucursal.Id>@sucursal.Nombre</option>
+                                }
+                             </select>
+                    <span asp-validation-for="SucursalId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <label asp-for="FechaTermino" class="control-label">Fecha de termino</label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="FechaTermino" required="required" class="form-control" id="inputFechaCreate" type="date" />
+                        <span asp-validation-for="FechaTermino" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label asp-for="Valor" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="Valor" class="form-control" />
+                        <span asp-validation-for="Valor" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label asp-for="Cuerpo" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12 ">
+                        <textarea asp-for="Cuerpo" class="form-control" style="height: 70px;"></textarea>
+                        <span asp-validation-for="Cuerpo" class="text-danger"></span>
+                    </div>
+                </div>
+            <div class="row mb-3">
+
+                <label asp-for="Tareas" class="col-sm-2 col-form-label">Tareas</label>
+                    <div class="col-sm-10 col-xl-12">
+                    @foreach (var tareas in (ViewBag.Tareas as List<Tarea>))
+                    {
+                        <div class="form-switch">
+                            <input value="@tareas.Id" checked="@tareas.isChecked" name="TareasId" class="form-check-input" type="checkbox" id="Chk_@tareas.Id">
+                            <label class="form-check-label" for="Chk_@tareas.Id">@tareas.Nombre</label>
+                        </div>
+                    }
+                </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Registrar</button>
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmContrato","Administrador")' role="button">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<div id="updateContrato" class="col-sm-12 invisible">
+    <h1 class="titulo text-center">Modificar Contrato</h1>
+        <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("UpdateContrato","Administrador")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                 <div class="row mb-3">
+                    @{
+                        var fecha = ViewBag.Contrato.FechaTermino;
+                        var formatFecha = fecha.ToString("yyyy/MM/dd");
+                    }
+                    <label asp-for="FechaTermino" class="control-label"></label>
+                    <div class="col-sm-10 col-xl-12">
+                        <input asp-for="FechaTermino" id="inputFechaUpdate" value="@formatFecha" class="form-control" type="date" />
+                        <span asp-validation-for="FechaTermino" required="required" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                <label asp-for="Valor" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12 ">
+                    <textarea asp-for="Valor" class="form-control" id="inputValorUpdate" style="height: 70px;"></textarea>
+                        <span asp-validation-for="Valor" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+            <div class="row mb-3">
+                <label asp-for="Cuerpo" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                    <textarea asp-for="Cuerpo" class="form-control" id="inputCuerpoUpdate" style="height: 70px;"></textarea>
+                    <span asp-validation-for="Cuerpo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="Tareas" class="col-sm-2 col-form-label">Tareas</label>
+                    <div class="col-sm-10 col-xl-12">
+                    @foreach (var tareas in (ViewBag.TareasContrato as List<Tarea>))
+                    {
+                        <div class="form-switch">
+                            <input value="@tareas.Id" checked="@tareas.isChecked" name="TareasId" class="form-check-input" type="checkbox" id="Chk_@tareas.Id">
+                            <label class="form-check-label" for="Chk_@tareas.Id">@tareas.Nombre</label>
+                        </div>
+                    }
+                    </div>
+                </div>
+
+            <input asp-for="Id" value="@ViewBag.Contrato.Id" class="form-control" hidden />
+
+                <div class="row ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" href='@Url.Action("IndexAdmContrato","Administrador")' role="button">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<input value="@ViewBag.Contrato.Estado" id="estadoContratox" class="form-control invisible" />
+<input value="@ViewBag.Contrato.Id" id="idContratox" class="form-control invisible" />
+<input value="@ViewBag.Contrato.SucursalId" id="idContratoSucursalx" class="form-control invisible" />
+<input value="@ViewBag.Contrato.Cuerpo" id="cuerpo" class="form-control invisible" />
+<input value="@ViewBag.Contrato.Valor" id="valor" class="form-control invisible" />
+
+    @section Scripts{
+    <script src="~/js/Administrador/AdministradorContrato.js"></script>
+}
+

@@ -1,0 +1,72 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model ServicioFinishViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+
+<div id="finishServicio" class="col-sm-12">
+    <h1 class="titulo text-center">Finalizar Actividad</h1>
+    <div class="bg-secondary rounded h-100 p-4 col-xl-10" style="margin:auto;">
+        <form action="@Url.Action("FinishServicio","Profesional")" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row mb-3">
+                    <label asp-for="Informe" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10 col-xl-12 ">
+                        <textarea asp-for="Informe" class="form-control" id="inputInformeFinish" style="height: 70px;"></textarea>
+                        <span asp-validation-for="Informe" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                <label asp-for="Comentario" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 col-xl-12 ">
+                        <textarea asp-for="Comentario" class="form-control" id="inputComentarioFinish" style="height: 70px;"></textarea>
+                        <span asp-validation-for="Comentario" class="text-danger"></span>
+                </div>
+            </div>
+            @if(ViewBag.Servicio.TipoServicioId == 1){
+                <div class="row" id="divTareas">
+                    @{
+                        
+                        var i = 0;
+                        foreach (var tareas in(ViewBag.Tareas as List<ResultadoTarea>))
+                                {
+
+                                        <div class="col-12" id="@Model.ResultadoTareas[i].Id">
+                                        @if (@tareas.Estado == 1){
+                                            <input value="1" name="ResultadoTareas[@i].Estado" class="form-check-input form-control checkInput" id="chk_@Model.ResultadoTareas[i].Id" style="margin-left:0.7rem;" type="checkbox" checked>
+                                }
+                                else{
+                                            <input value="1" name="ResultadoTareas[@i].Estado" class="form-check-input form-control checkInput" id="chk_@Model.ResultadoTareas[i].Id" style="margin-left:0.7rem;" type="checkbox" >
+
+                                }
+                                            <label class="control-label" style="margin-left:1.3rem;">@tareas.Nombre</label>
+
+                                            <input asp-for="@Model.ResultadoTareas[i].Comentario" class="form-control " id="comment_@Model.ResultadoTareas[i].Id" disabled />
+                                                    <input asp-for="@Model.ResultadoTareas[i].Id" value="@tareas.Id" class="form-control" hidden />
+                                            <input id="estado_@Model.ResultadoTareas[i].Id" value="@tareas.Estado" class="form-control" hidden />
+                                                    </div>
+                                i++;
+                                }
+                    }
+                </div>
+            }
+
+            <input asp-for="Id" value="@ViewBag.Servicio.Id" class="form-control" hidden />
+            <input asp-for="TipoServicioId" value="@ViewBag.Servicio.TipoServicioId" class="form-control" hidden />
+
+                <div class="row ">
+                    <div class="col-12">
+                        <button id="btnCreate" type="submit" name="Submit" class="btn btn-primary btnCreate float-right ">Guardar</button>
+                        <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script src="~/js/Profesional/ProfesionalServicioFinish.js"></script>
+    }

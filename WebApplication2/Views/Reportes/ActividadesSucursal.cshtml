@@ -1,0 +1,128 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model List<IndexAdmServicioViewModel>
+@{
+    Layout = "~/Views/Reportes/_LayoutReportes.cshtml";
+}
+
+@section Head{
+}   <div class="border border-dark">
+        <h1 class="titulo text-center">Datos del Cliente</h1>
+        <br />
+        <div class="col-sm-12">        
+            <div>
+                <div class="row flexrow mb-3">
+                    <div class="col-12 col-md-6 mb-2">
+                        <label class="form-label">Empresa</label>
+                        <input class="col-12" value="NombreEmpresa" disabled>
+                    </div>
+                    <div class=" col-12 col-md-6 ">
+                        <label class="form-label">Sucursal</label>
+                        <input class="col-12" value="NombreSucursal" disabled>
+                    </div>
+                </div>
+                <div class="row flexrow mb-3">
+                    <div class=" col-12 col-md-6 ">
+                        <label class="form-label">Dirección</label>
+                        <input class="col-12" value="dato 2" disabled>
+                    </div>
+                    <div class="col-12 col-md-6 mb-2">
+                        <label class="form-label">Email</label>
+                        <input class="col-12" value="empresa 1" disabled>
+                    </div>
+                    <div class=" col-12 col-md-6 ">
+                        <label class="form-label">Telefono</label>
+                        <input class="col-12" value="dato 2" disabled>
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="border border-dark">
+        <h1 class="titulo text-center">Resumen de las Actividades</h1>
+        <br />
+        <div class="col-sm-12">
+            <div>
+                @{
+                    var tiposervicios = Model.GroupBy(d => d.TipoServicio);
+                    foreach (var tipo in tiposervicios)
+                    {   
+                        <br />
+                        <h1>@tipo.Key.ToString()</h1>
+                        <br />
+                        <div class="row flexrow mb-3">
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Totales</label>
+                                <input class="col-12" value="@Model.Count(d => d.TipoServicio == tipo.Key.ToString())" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Pendientes</label>
+                                <input class="col-12" value="@Model.Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Pendiente")" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-2">
+                                <label class="form-label">Realizadas</label>
+                                <input class="col-12" value="@Model.Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Realizada")" disabled>
+                            </div>
+                            <div class=" col-12 col-md-6 ">
+                                <label class="form-label">Canceladas</label>
+                                <input class="col-12" value="@Model.Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Cancelada")" disabled>
+                            </div>
+                            <div class="col-12 col-md-6 mb-2">
+                                <label class="form-label">Atrasadas</label>
+                                <input class="col-12" value="@Model.Count(d => d.TipoServicio == tipo.Key.ToString() && d.Estado == "Atrasada")" disabled>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <h1 class="titulo text-center">Actividades</h1>
+    <br />
+    <div class="col-sm-12">
+        <table id="tablaServicios" class="table">
+            <thead>
+                <tr class="filtros">
+                    <th>Id </th>
+                    <th>Actividad</th>
+                    <th>Profesional</th>
+                    <th>Fecha</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Termino</th>
+                    <th>Estado</th>
+                    <th>Adicional</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var servicio in (@Model as List<IndexAdmServicioViewModel>))
+            {
+                <tr class="table-row ">
+                    <td>
+                        @Html.DisplayFor(m => servicio.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.TipoServicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.Profesional)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.HoraInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.HoraTermino)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => servicio.Estado)
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox("Adicional",servicio.Adicional)
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>

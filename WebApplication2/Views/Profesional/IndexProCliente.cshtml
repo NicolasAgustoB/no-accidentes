@@ -1,0 +1,115 @@
+﻿@using AppWeb.Models.ViewModels.Profesional
+@model IndexProCliente;
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Clientes</h1>
+
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div id="divTablaClientes">
+                <table id="tablaClientes" class="table table-responsive-sm">
+                    <thead>
+                        <tr class="filtros">
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Rubro</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                            <th>Sucursal</th>
+                            <th>Empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var cliente in (ViewBag.Cliente as List<IndexProCliente>))
+                    {
+                        <tr class="table-row ">
+                            <td>
+                                @Html.DisplayFor(m => cliente.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Rubro)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Direccion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Sucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => cliente.Empresa)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row ">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarCliente","Administrador")">
+                        <button type="submit" id="btnCreateCliente" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="SucursalId" id="inputCreateCliente" class="form-control " hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarCliente","Administrador")">
+                        <button type="submit" id="btnUpdateCliente" class="btn btn-primary btnUpdate float-xl-right float-sm-left invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateCliente" class="form-control " hidden />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="center">
+        <div id="divTablaClientes">
+            <table id="tablaClientes" class="tableCliente table-sm">
+                <thead>
+                    <tr class="filtros">
+                        <th>Nombre</th>
+                        <th>Rubro</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Sucursal</th>
+                        <th>Empresa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var cliente in (ViewBag.Cliente as List<IndexProCliente>))
+                {
+                    <tr class="table-row ">
+                        <td>
+                            @Html.DisplayFor(m => cliente.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => cliente.Rubro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => cliente.Direccion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => cliente.Telefono)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => cliente.Sucursal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => cliente.Empresa)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    </div>
+
+@section Scripts{
+    <script src="~/js/Profesional/IndexProCliente.js"></script>
+}

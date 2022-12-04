@@ -1,0 +1,172 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model ServicioViewModel
+@{
+    Layout = "~/Views/Profesional/_LayoutProfesional.cshtml";
+}
+
+@section Head{
+}
+
+    <h1 class="titulo text-center">Detalles de la Actividad</h1>
+    <div class="row g-4">
+        <div class="col-sm-12 col-md-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4">Datos Actividad</h6>
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 mb-2">
+                        <label class="form-label">Actividad</label>
+                        <input class="col-12 form-control" value="@ViewBag.TipoServicio.Nombre" disabled>
+                    </div>
+                    <div class=" col-12 col-md-6 align-self-md-center">
+                        <label for="inputAdicionalCheck" class="col-form-label  col-sm-4 pt-0 " style="margin-left:4.2rem">Adicional</label>
+                        @{
+                        var adicional = ViewBag.Servicio.Adicional;
+                        if (adicional == 1)
+                        {
+                            <input id="inputAdicionalCheck" class="form-check-input checkInput" type="radio" style="margin-left:11rem" checked disabled>
+
+                        }
+                        else
+                        {
+                            <input id="inputAdicionalCheck" class="form-check-input checkInput" style="margin-left:11rem" type="radio" disabled>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class=" col-12 col-md-4 ">
+                    @{
+                        var fecha = ViewBag.Servicio.Fecha;
+                        var formatFecha = fecha.ToString("yyyy/MM/dd");
+                    }
+                    <label class="control-label">Fecha</label>
+                    <input class=" col-12 form-control" value="@formatFecha" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    @{
+                        var horaInicio = ViewBag.Servicio.HoraInicio;
+                        var formatHoraInicio = horaInicio.ToString("HH:mm");
+                    }
+                    <label class="control-label">Hora Inicio</label>
+                    <input class="col-12 form-control" value="@formatHoraInicio" disabled>
+                </div>
+                <div class=" col-12 col-md-4 ">
+                    @{
+                        var horaTermino = ViewBag.Servicio.HoraTermino;
+                        var formatHoraTermino = horaTermino.ToString("HH:mm");
+                    }
+                    <label class="control-label">Hora Termino</label>
+                    <input class="col-12 form-control" value="@formatHoraTermino" disabled>
+                </div>
+            </div>
+            <div class="row mb-3 ">
+                <div class="col-12 col-md-6">
+                    <label class="control-label">Profesional</label>
+                    <input class="col-12 form-control" value="@ViewBag.Empleado.Nombre" disabled>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="control-label">Asistentes</label>
+                    <input class="col-12 form-control" value="@ViewBag.Servicio.Asistentes" disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="control-label">Descripcion</label>
+                    <textarea disabled class="form-control" style="height: 70px;">@ViewBag.Servicio.Descripcion</textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="control-label">Materiales</label>
+                    <textarea disabled class="form-control" style="height: 70px;">@ViewBag.Servicio.Material</textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="control-label">Comentario</label>
+                    <textarea disabled class="form-control" style="height: 70px;">@ViewBag.Servicio.Comentario</textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label class="control-label">Informe</label>
+                    <textarea disabled class="form-control" style="height: 70px;">@ViewBag.Servicio.Informe</textarea>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-12">
+                    <a id="btnCancel" class="btn btn-primary btnRead float-left" onclick="history.back()" role="button">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="g-4 mb-4">
+            <div class="bg-secondary rounded h-100 p-4 g-4 mb-4">
+                <h6 class="mb-4">Datos del Cliente</h6>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label class="control-label">Nombre</label>
+                        <input class="col-12 form-control" value="@ViewBag.Cliente.Nombre" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-12 col-md-6">
+                        <label class="control-label">Telefono</label>
+                        <input class="col-12 form-control" value="@ViewBag.Cliente.Telefono" disabled>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="control-label">Email</label>
+                        <input class="col-12 form-control" value="@ViewBag.Cliente.Email" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-12 col-md-6">
+                        <label class="control-label">Empresa</label>
+                        <input class="col-12 form-control" value="@ViewBag.Empresa.Nombre" disabled>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="control-label">Sucursal</label>
+                        <input class="col-12 form-control" value="@ViewBag.Sucursal.Nombre" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <label class="control-label">Dirección</label>
+                        <input class="col-12 form-control" value="@ViewBag.Sucursal.Direccion" disabled>
+                    </div>
+                </div>
+            </div>
+            <div id="divTareas" class="bg-secondary rounded h-100 p-4 invisible">
+                <h6 class="mb-4">Tareas</h6>
+                <div class="row mb-3">
+                    @foreach (var item in ViewBag.ResultadoTareas)
+                    {
+                        if (item.Estado == 1)
+                        {
+                            <div class="col-6">
+                                <input class="form-check-input checkInput" type="checkbox" style="margin-left:0" checked disabled>
+                                <label class="control-label" style="margin-left:8px">@item.Nombre</label>
+                                <input class="col-12 form-control" value="@item.Comentario" disabled>
+      
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-6">
+                                <input class="form-check-input checkInput" style="margin-left:0" type="checkbox" disabled>
+                                <label class="control-label" style="margin-left:8px">@item.Nombre</label>
+                                 <input class="col-12 form-control" value="@item.Comentario" disabled>
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input value="@ViewBag.Servicio.TipoServicioId" id="tipoServicio" class="form-control invisible" />
+@section Scripts{
+    <script src="~/js/Administrador/AdministrarServicioRead.js"></script>
+}

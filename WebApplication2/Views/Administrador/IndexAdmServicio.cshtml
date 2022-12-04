@@ -1,0 +1,91 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@model IndexAdmServicioViewModel
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Actividades</h1>
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div id="divTablaServicios">
+                <table id="tablaServicios" class="table table-responsive-sm table-responsive-mb">
+                    <thead>
+                        <tr class="filtros bg-negro">
+                            <th>Id </th>
+                            <th>Actividad</th>
+                            <th>Profesional</th>
+                            <th>Empresa</th>
+                            <th>Sucursal</th>
+                            <th>Fecha</th>
+                            <th>Hora Inicio</th>
+                            <th>Hora Termino</th>
+                            <th>Estado</th>
+                            <th>Adicional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var servicio in (ViewBag.Servicio as List<IndexAdmServicioViewModel>))
+                    {
+                        <tr class="table-row bg-letras">
+                            <td>
+                                @Html.DisplayFor(m => servicio.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.TipoServicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Profesional)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Empresa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Sucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.HoraInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.HoraTermino)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => servicio.Estado)
+                            </td>
+                            <td class="text-center">
+                                @Html.CheckBox("Adicional",servicio.Adicional)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarServicioRead","Administrador")">
+                        <button type="submit" id="btnReadServicio" class="btn btn-primary btnRead float-left invisible">Detalles</button>
+                        <input name="Id" id="inputReadServicio" class="form-control" hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarServicio","Administrador")">
+                        <button type="submit" id="btnCreateServicio" class="btn btn-primary btnCreate float-right">Crear</button>
+                        <input name="Id" id="inputCreateServicio" class="form-control" hidden />
+                    </form>
+                    <form action="@Url.Action("AdministrarServicio","Administrador")">
+                        <button type="submit" id="btnUpdateServicio" class="btn btn-primary btnUpdate float-right invisible">Modificar</button>
+                        <input name="Id" id="inputUpdateServicio" class="form-control" hidden />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdmServicio.js"></script>
+}

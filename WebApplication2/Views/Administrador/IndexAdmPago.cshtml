@@ -1,0 +1,81 @@
+﻿@using AppWeb.Models.ViewModels.Administrador
+@{
+    Layout = "~/Views/Administrador/_LayoutAdministrador.cshtml";
+}
+
+@section Head{
+}
+    <h1 class="titulo text-center">Pagos</h1>
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div id="divTablaPagos">
+                <table id="tablaPagos" class="table table-responsive-sm">
+                    <thead>
+                        <tr class="filtros bg-negro">
+                            <th>Id </th>
+                            <th>Empresa</th>
+                            <th>Sucursal</th>
+                            <th>Fecha Creación</th>
+                            <th>Fecha Pago</th>
+                            <th>Fecha Limite</th>
+                            <th>Monto Total</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var pago in (ViewBag.Pago as List<IndexAdmPagoViewModel>))
+                    {
+                        <tr class="table-row bg-letras">
+                            <td>
+                                @Html.DisplayFor(m => pago.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.NombreEmpresa)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.NombreSucursal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.FechaPago)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.FechaLimite)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.MontoTotal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => pago.EstadoPago)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-12">
+                    <form action="@Url.Action("AdministrarPagoRead","Administrador")">
+                        <button type="submit" id="btnReadPago" class="btn btn-primary btnRead float-left invisible">Detalles</button>
+                        <input name="Id" id="inputSelectedPagoRead" class="form-control" hidden />
+                    </form>
+                    <form action="@Url.Action("NotificarAtraso","Administrador")" method="post">
+                        <button type="submit" id="btnAtraso" class="btn btn-primary btnCreate float-left invisible">Notificar Atraso</button>
+                        <input name="Id" id="inputSelectedContratoId" class="form-control" hidden />
+                    </form>
+                    <form action="@Url.Action("ConfirmarPago","Administrador")" method="post">
+                        <button type="submit" id="btnConfirmarPago" class="btn btn-primary btnCreate float-right">Confirmar Pago</button>
+                        <input name="Id" id="inputSelectedPago" class="form-control invisible" />
+                        <input name="MetodoPago" id="inputMetodoPago" class="form-control invisible" />
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Administrador/IndexAdmPago.js"></script>
+}
