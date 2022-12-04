@@ -1,0 +1,24 @@
+borrar 
+appweb/views/usuario
+
+ERRORES
+
+ADMINISTRADOR
+- CREAR EMPRESA:
+nombre empresa, rubro: solo permite letras
+direccion, rubro: pide formato raro
+no hay mensaje de confirmacion cuando se crea una empresa
+falta poner los tildes a los label
+-MODIFICAR EMPRESA
+- al actualizar un campo y dejarlo vacio, muere
+
+- CREAR SUCURSAL:
+se puede crear sucursal con 0 trabajadores
+-MODIFICAR EMPRESA
+- al actualizar un campo y dejarlo vacio, muere
+/lo mismo que empresa/
+
+- MODIFICAR CLIENTE
+no se puede actualizar un cliente
+
+poner un metodo de pago incorrecto la mata
